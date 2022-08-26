@@ -1,0 +1,58 @@
+{
+  "name": "Pastebin Deva Data File",
+  "describe": "The main Data file for Pastebin Deva",
+  "copyright": "Copyright (c)2022 Quinn Michaels. All rights reserved.",
+  "data": {
+    "agent": {
+      "uid": "5941279709976",
+      "key": "pastebin",
+      "name": "Pastebin Deva",
+      "describe": "The pastebin deva",
+      "prompt": {
+        "emoji": "📋",
+        "text": "pastebin",
+        "colors": {
+          "label": {
+            "R": 0,
+            "G": 150,
+            "B": 255
+          },
+          "text": {
+            "R": 101,
+            "G": 192,
+            "B": 255
+          }
+        }
+      },
+      "voice": {
+        "speech": "Alex",
+        "speed": 1
+      },
+      "profile": {
+        "emoji": "/public/devas/pastebin/emoji.png",
+        "avatar": "/public/devas/pastebin/avatar.png",
+        "background": "/assets/img/indra-background.jpg",
+        "describe": "The pastebin deva",
+        "gender": "M"
+      }
+    },
+    "vars": {
+      "messages": {
+        "init": "🟠 INIT",
+        "start": "🔵 START",
+        "enter": "🟢 ENTER",
+        "stop": "🔴 STOP",
+        "exit": "🟡 EXIT",
+        "done": "🟣 DONE",
+        "error": "💣 ERROR!",
+        "login": "✅ LOGIN",
+        "service": "✋ NO SERVICE"
+      },
+      "api": {
+        "login": "https://pastebin.com/api/api_login.php",
+        "post": "https://pastebin.com/api/api_post.php",
+        "raw": "https://pastebin.com/raw/"
+      }
+    }
+  }
+}
