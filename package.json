@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/indraai/PastebinDeva/issues"
   },
+  "dependencies": {
+    "request": "^2.88.2"
+  },
   "homepage": "https://github.com/indraai/PastebinDeva#readme"
 }
