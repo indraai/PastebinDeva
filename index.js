@@ -30,6 +30,11 @@ const PASTEBIN = new Deva({
   modules: {},
   deva: {},
   func: {
+    /**************
+    func: view
+    params: opts
+    describe: View a pastebin post with it's id as the text parameter.
+    ***************/
     view(opts) {
       return new Promise((resolve, reject) => {
         this.question(`#web get ${this.vars.api.raw}${opts.text}`).then(result => {
@@ -40,6 +45,13 @@ const PASTEBIN = new Deva({
         }).catch(reject);
       });
     },
+
+    /**************
+    func: post
+    params: packet
+    describe: Post to paste bin if you have alraedy set the access key in client
+    services file.
+    ***************/
     post(packet) {
       return new Promise((resolve, reject) => {
         if (!this.running) return resolve(false);
@@ -60,6 +72,11 @@ const PASTEBIN = new Deva({
       });
     },
 
+    /**************
+    func: login
+    params: none
+    describe: Login to pastebin api using the keys set in the client file.
+    ***************/
     login() {
       return new Promise((resolve, reject) => {
         if (!this.client.services.pasatebin.api_user_key) return resolve({text:this.vars.messages.service});
@@ -77,18 +94,47 @@ const PASTEBIN = new Deva({
     },
   },
   methods: {
+    /**************
+    method: view
+    params: packet
+    describe: Call the view function to return a paste.
+    ***************/
     view(packet) {
       return this.func.view(packet.q);
     },
+
+    /**************
+    method: post
+    params: packet
+    describe: Post the contents of a packet to pastebin.
+    ***************/
     post(packet) {
       return this.func.post(packet);
     },
+
+    /**************
+    method: uid
+    params: packet
+    describe: Generate a unique id
+    ***************/
     uid(packet) {
-      return Promise.resolve(this.uid());
+      return Promise.resolve({text:this.uid()});
     },
+
+    /**************
+    method: status
+    params: packet
+    describe: Return the current statusof the deva.
+    ***************/
     status(packet) {
       return this.status();
     },
+
+    /**************
+    method: help
+    params: packet
+    describe: Return the help file for the deva.
+    ***************/
     help(packet) {
       return new Promise((resolve, reject) => {
         this.lib.help(packet.q.text, __dirname).then(help => {
@@ -103,6 +149,14 @@ const PASTEBIN = new Deva({
       });
     }
   },
+
+  /**************
+  func: onInit
+  params: none
+  describe: The procedure to run when the deva initializes. If there is a
+  pastebin key in the client services object it will log the user into pastebin
+  and allow posting.
+  ***************/
   onInit() {
     this.prompt(this.vars.messages.init);
     // login to pastebin if there is an api key
