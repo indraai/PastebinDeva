@@ -55,7 +55,8 @@ const PASTEBIN = new Deva({
     post(packet) {
       return new Promise((resolve, reject) => {
         if (!this.running) return resolve(false);
-        if (!this.client.services.pasatebin.api_user_key) resolve({text:this.vars.messages.service});
+        const loggedin = this.client.services.pastebin && this.client.services.pastebin.api_user_key;
+        if (!loggedin) resolve({text:this.vars.messages.service});
         request.post(this.vars.api.post, {
           form: {
             api_dev_key: this.client.services.pastebin.api_dev_key,
@@ -79,7 +80,8 @@ const PASTEBIN = new Deva({
     ***************/
     login() {
       return new Promise((resolve, reject) => {
-        if (!this.client.services.pasatebin.api_user_key) return resolve({text:this.vars.messages.service});
+        const loggedin = this.client.services.pastebin && this.client.services.pastebin.api_user_key;
+        if (!loggedin) return resolve({text:this.vars.messages.service});
         request.post(this.vars.api.login, {
           form: {
             api_dev_key: this.client.services.pastebin.api_dev_key,
@@ -97,7 +99,7 @@ const PASTEBIN = new Deva({
     /**************
     method: view
     params: packet
-    describe: Call the view function to return a paste.
+    describe: Call the view function to return a pastebin.
     ***************/
     view(packet) {
       return this.func.view(packet.q);
@@ -160,11 +162,14 @@ const PASTEBIN = new Deva({
   onInit() {
     this.prompt(this.vars.messages.init);
     // login to pastebin if there is an api key
-    if (this.client.services.pastebin.api_dev_key) this.func.login().then(api_user_key => {
+    const login = this.client.services.pastebin && this.client.services.pastebin.api_dev_key;
+
+    if (login) this.func.login().then(api_user_key => {
       this.prompt(this.vars.messages.login);
-      this.client.services.pasatebin.api_user_key = api_user_key;
+      this.client.services.pastebin.api_user_key = api_user_key;
       return this.start();
     }).catch(err => {
+      console.error(err);
       return this.error(err);
     });
     else return this.start();
