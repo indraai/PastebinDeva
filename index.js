@@ -167,6 +167,7 @@ const PASTEBIN = new Deva({
     }).catch(err => {
       return this.error(err);
     });
+    else return this.start();
   },
 });
 module.exports = PASTEBIN
