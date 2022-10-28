@@ -1,5 +1,5 @@
 {
-  "name": "@feecting/pastebindeva",
+  "name": "@indra.ai/pastebindeva",
   "version": "0.0.5",
   "description": "The Pastebin Deva",
   "main": "index.js",
@@ -20,6 +20,7 @@
     "url": "https://github.com/indraai/PastebinDeva/issues"
   },
   "dependencies": {
+    "@indra.ai/deva": "^1.0.25",
     "request": "^2.88.2"
   },
   "homepage": "https://github.com/indraai/PastebinDeva#readme"
